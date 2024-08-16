@@ -1,2 +1,0 @@
-# cbatten-scripts
-Helper scripts

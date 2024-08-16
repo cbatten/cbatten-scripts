@@ -1,0 +1,72 @@
+#!/bin/bash
+#=========================================================================
+# remote-open [options] <file>
+#=========================================================================
+#
+#  -f  Open in finder
+#  -h  Display this message
+#  -v  Verbose mode
+#
+# Creates a url suitable for copying the given file using scp to a remote
+# machine. We can use this script along with iTerm2 to locally open files
+# from within a remote terminal session.
+#
+# Author : Christopher Batten
+# Date   : December 9, 2011
+
+set -e
+
+#-------------------------------------------------------------------------
+# Command line parsing
+#-------------------------------------------------------------------------
+
+function usage
+{
+  echo ""
+  sed -n '3p' $0 | sed -e 's/#//'
+  sed -n '5,/^$/p' $0 | sed -e 's/#//'
+  exit 1
+}
+
+finder=no
+verbose=no
+while getopts "fhvr" OPTION; do
+  case $OPTION in
+    f)   finder=yes ;;
+    v)   verbose=yes ;;
+    h|?) usage ;;
+  esac
+done
+
+file="${@:${OPTIND}:1}"
+
+#-------------------------------------------------------------------------
+# Main
+#-------------------------------------------------------------------------
+
+# Determine the three parts of the ssh url including the username, the
+# server, and the absolute path to the given file.
+
+# I used to use this to figure out the server name:
+#
+#  server=$(hostname -s).$(dnsdomainname)
+#
+# But then dnsdomainname wasn't returning anything on amdpool-04, so
+# I went back to just using hostname by itself.
+
+user=$(whoami)
+server=$(hostname)
+file=$(readlink -f ${file})
+
+# Simply print out the full ssh url, but prefix it with a special phrase.
+# We can use iTerm2 triggers to search for this phrase and open the file
+# in emacs whenever we see the phrase in the terminal.
+
+if [[ ${finder} = "no" ]]; then
+  echo "remote-open-trigger: ${user}@${server}:${file}"
+else
+  echo "remote-open-finder-trigger: ${user}@${server}:${file}"
+fi
+
+exit 0
+

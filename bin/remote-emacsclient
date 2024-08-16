@@ -1,0 +1,63 @@
+#!/bin/bash
+#=========================================================================
+# remote-emacsclient-trigger [options] <file>
+#=========================================================================
+#
+#  -h  Display this message
+#  -v  Verbose mode
+#
+# Creates a ssh url suitable for opening the given file using tramp in a
+# remote emacs. We can use this script along with iTerm2 to locally open
+# files from within a remote terminal session.
+#
+# Author : Christopher Batten
+# Date   : December 9, 2011
+
+set -e
+
+#-------------------------------------------------------------------------
+# Command line parsing
+#-------------------------------------------------------------------------
+
+function usage
+{
+  echo ""
+  sed -n '3p' $0 | sed -e 's/#//'
+  sed -n '5,/^$/p' $0 | sed -e 's/#//'
+  exit 1
+}
+
+verbose=no
+while getopts "hvr" OPTION; do
+  case $OPTION in
+    v)   verbose=yes ;;
+    h|?) usage ;;
+  esac
+done
+
+#-------------------------------------------------------------------------
+# Main
+#-------------------------------------------------------------------------
+
+# Determine the three parts of the ssh url including the username, the
+# server, and the absolute path to the given file.
+
+# I used to use this to figure out the server name:
+#
+#  server=$(hostname -s).$(dnsdomainname)
+#
+# But then dnsdomainname wasn't returning anything on amdpool-04, so
+# I went back to just using hostname by itself.
+
+user=$(whoami)
+server=$(hostname)
+file=$(readlink -f $1)
+
+# Simply print out the full ssh url, but prefix it with a special phrase.
+# We can use iTerm2 triggers to search for this phrase and open the file
+# in emacs whenever we see the phrase in the terminal.
+
+echo "remote-emacsclient-trigger: /ssh:${user}@${server}:${file}"
+
+exit 0
+
