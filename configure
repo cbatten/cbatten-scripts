@@ -584,7 +584,7 @@ PACKAGE_STRING='cbatten-scripts ?'
 PACKAGE_BUGREPORT='Christopher Batten'
 PACKAGE_URL=''
 
-ac_unique_file="bin/setup-ece4750.sh"
+ac_unique_file="bin/remote-emacsclient"
 ac_subst_vars='LTLIBOBJS
 LIBOBJS
 AWK
