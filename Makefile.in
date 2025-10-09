@@ -30,17 +30,7 @@ project_name := @PACKAGE_TARNAME@
 src_dir      := @srcdir@
 scripts_dir  := $(src_dir)/scripts
 
-# If the version information is not in the configure script, then we
-# assume that we are in a working directory. We use the vcs-version.sh
-# script in the scripts directory to generate an appropriate version
-# string. Currently the way things are setup we have to run this script
-# everytime we run make so the script needs to be as fast as possible.
-
-ifeq (@PACKAGE_VERSION@,?)
-  project_ver:=$(shell $(scripts_dir)/vcs-version.sh $(src_dir))
-else
-  project_ver:=@PACKAGE_VERSION@
-endif
+project_ver:=0.0
 
 # Installation
 
