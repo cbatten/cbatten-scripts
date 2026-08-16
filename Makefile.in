@@ -8,6 +8,7 @@ install_exes = \
   $(src_dir)/bin/setup-x2go.sh \
 
 install_etcs = \
+  $(src_dir)/etc/gitconfig.d \
 
 #-------------------------------------------------------------------------
 # Basic setup
@@ -65,7 +66,15 @@ install-exes : $(install_exes)
     $(INSTALL_EXE) $$file $(install_exes_dir); \
   done
 
-install : install-exes
+# Just deal with this install manually for now
+
+install-etcs : $(install_etcs)
+	$(MKINSTALLDIRS) $(DESTDIR)/etc
+	$(MKINSTALLDIRS) $(DESTDIR)/etc/gitconfig.d
+	$(INSTALL_ETC) $(src_dir)/etc/gitconfig.d/cbatten-git-config \
+                 $(DESTDIR)/etc/gitconfig.d
+
+install : install-exes install-etcs
 ifeq ($(enable_stow),yes)
 	$(MKINSTALLDIRS) $(stow_pkg_dir)
 	cd $(stow_pkg_dir) && \

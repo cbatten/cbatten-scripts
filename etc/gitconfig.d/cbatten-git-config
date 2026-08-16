@@ -1,0 +1,18 @@
+#=========================================================================
+# Git Config File
+#=========================================================================
+
+[alias]
+  xstatus="!ece6745-git-status"
+  xadd="!ece6745-git-add"
+  xlog="!ece6745-git-log"
+  xlogr="!ece6745-git-log -r"
+  xpull="pull --rebase"
+
+[alias]
+  xs="!ece6745-git-status"
+  xa="!ece6745-git-add"
+  xl="!ece6745-git-log"
+  xlr="!ece6745-git-log -r"
+  xp="pull --rebase"
+
