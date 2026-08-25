@@ -3,16 +3,16 @@
 #=========================================================================
 
 [alias]
-  xstatus="!ece6745-git-status"
-  xadd="!ece6745-git-add"
-  xlog="!ece6745-git-log"
-  xlogr="!ece6745-git-log -r"
+  xstatus="!cbatten-git-status"
+  xadd="!cbatten-git-add"
+  xlog="!cbatten-git-log"
+  xlogr="!cbatten-git-log -r"
   xpull="pull --rebase"
 
 [alias]
-  xs="!ece6745-git-status"
-  xa="!ece6745-git-add"
-  xl="!ece6745-git-log"
-  xlr="!ece6745-git-log -r"
+  xs="!cbatten-git-status"
+  xa="!cbatten-git-add"
+  xl="!cbatten-git-log"
+  xlr="!cbatten-git-log -r"
   xp="pull --rebase"
 

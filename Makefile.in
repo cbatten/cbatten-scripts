@@ -6,6 +6,9 @@ install_exes = \
   $(src_dir)/bin/remote-emacsclient \
   $(src_dir)/bin/remote-open \
   $(src_dir)/bin/setup-x2go.sh \
+  $(src_dir)/bin/cbatten-git-add \
+  $(src_dir)/bin/cbatten-git-status \
+  $(src_dir)/bin/cbatten-git-log \
 
 install_etcs = \
   $(src_dir)/etc/gitconfig.d \
